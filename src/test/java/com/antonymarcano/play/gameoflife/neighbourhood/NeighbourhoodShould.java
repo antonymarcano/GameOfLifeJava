@@ -1,6 +1,7 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import org.junit.Ignore;
+import com.antonymarcano.play.gameoflife.GameOfLife;
+import com.antonymarcano.play.gameoflife.LiveCell;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
@@ -12,7 +13,6 @@ import static org.mockito.Mockito.when;
 public class NeighbourhoodShould {
 
     @Test
-    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
     public void have_size_of_eight_when_a_cell_is_surrounded() {
         GameOfLife board = mock(GameOfLife.class);
         when(board.contains(any(LiveCell.class))).thenReturn(true);

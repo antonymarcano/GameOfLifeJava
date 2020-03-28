@@ -1,8 +1,10 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.neighbourhood;
+
+import com.antonymarcano.play.gameoflife.GameOfLife;
+import com.antonymarcano.play.gameoflife.LiveCell;
 
 public class Neighbourhood implements NeedsABoard, Neighbours {
     private LiveCell cell;
-    private GameOfLife board;
 
     public Neighbourhood(LiveCell cell) {
         this.cell = cell;
@@ -14,12 +16,11 @@ public class Neighbourhood implements NeedsABoard, Neighbours {
 
     @Override
     public Neighbours on(GameOfLife board) {
-        this.board = board;
         return this;
     }
 
     @Override
     public int size() {
-        return 0;
+        return 8;
     }
 }
