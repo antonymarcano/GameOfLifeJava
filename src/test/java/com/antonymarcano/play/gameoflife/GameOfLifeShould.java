@@ -19,9 +19,7 @@ public class GameOfLifeShould {
                 LiveCell.at(0,0)
         );
 
-        Set<LiveCell> draftBoard = new HashSet<>(board);
-        draftBoard.remove(LiveCell.at(0,0));
-        board = copyOf(draftBoard);
+        board = nextGenerationOf(board);
 
         assertThat(board.size(), is(0));
     }
@@ -34,10 +32,16 @@ public class GameOfLifeShould {
                 LiveCell.at(0,1)
         );
 
-        Set<LiveCell> draftBoard = new HashSet<>(board);
-        draftBoard.remove(LiveCell.at(0,0));
-        board = copyOf(draftBoard);
+        board = nextGenerationOf(board);
 
         assertThat(board.size(), is(0));
+    }
+
+
+    private Set<LiveCell> nextGenerationOf(Set<LiveCell> board) {
+        Set<LiveCell> draftBoard = new HashSet<>(board);
+        draftBoard.remove(LiveCell.at(0, 0));
+        board = copyOf(draftBoard);
+        return board;
     }
 }
