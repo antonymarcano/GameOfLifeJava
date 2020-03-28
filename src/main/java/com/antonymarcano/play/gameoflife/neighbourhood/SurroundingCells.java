@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
+import com.antonymarcano.play.gameoflife.Cell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
 import com.antonymarcano.play.gameoflife.LiveCell;
 
@@ -30,6 +31,11 @@ public class SurroundingCells implements Neighbourhood, NeedsABoard {
     @Override
     public int size() {
         return neighbours.size();
+    }
+
+    @Override
+    public Set<? extends Cell> all() {
+        return new HashSet<>();
     }
 
     public SurroundingCells(LiveCell cell) {
