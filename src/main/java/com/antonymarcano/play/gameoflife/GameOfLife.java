@@ -8,14 +8,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static java.util.Set.copyOf;
-import static java.util.Set.of;
 
 @EqualsAndHashCode
 @ToString
 public class GameOfLife {
     private Set<LiveCell> currentBoard;
 
-    public static final Set<SimpleEntry<Integer, Integer>> POTENTIAL_NEIGHBOURS = of(
+    public static final Set<SimpleEntry<Integer, Integer>> RELATIVE_POSITION_OF_NEIGHBOURS = Set.of(
             new SimpleEntry<>(0, 1), //top middle
             new SimpleEntry<>(1, 1), //top right
             new SimpleEntry<>(1, 0), //middle right
@@ -29,9 +28,8 @@ public class GameOfLife {
     public GameOfLife(Set<LiveCell> cells) {
         currentBoard = copyOf(cells);
     }
-
     public static GameOfLife with(Set<LiveCell> cells) {
-        return new GameOfLife(copyOf(cells));
+        return new GameOfLife(cells);
     }
 
     public GameOfLife nextGeneration() {
@@ -49,7 +47,7 @@ public class GameOfLife {
 
     public Integer countNeighboursOf(LiveCell cell) {
         int count = 0;
-        for (SimpleEntry<Integer, Integer> neighbour : POTENTIAL_NEIGHBOURS) {
+        for (SimpleEntry<Integer, Integer> neighbour : RELATIVE_POSITION_OF_NEIGHBOURS) {
             int x = cell.x() + neighbour.getKey();
             int y = cell.y() + neighbour.getValue();
             LiveCell potentialNeighbour = new LiveCell(x, y);
