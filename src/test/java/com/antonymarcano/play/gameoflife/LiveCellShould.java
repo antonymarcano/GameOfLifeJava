@@ -20,4 +20,18 @@ public class LiveCellShould {
 
         assertThat(cell.survivesInNeighbourhoodOf(2), is(true));
     }
+
+    @Test
+    public void not_survive_with_less_than_two_live_neighbours() {
+        LiveCell cell = LiveCell.at(0, 0);
+
+        assertThat(cell.survivesInNeighbourhoodOf(1), is(false));
+    }
+
+    @Test
+    public void not_survive_with_more_than_three_live_neighbours() {
+        LiveCell cell = LiveCell.at(0, 0);
+
+        assertThat(cell.survivesInNeighbourhoodOf(4), is(false));
+    }
 }
