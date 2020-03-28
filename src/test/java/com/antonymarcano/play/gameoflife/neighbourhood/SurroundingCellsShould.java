@@ -4,7 +4,6 @@ import com.antonymarcano.play.gameoflife.Cell;
 import com.antonymarcano.play.gameoflife.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
 import com.antonymarcano.play.gameoflife.LiveCell;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -40,7 +39,6 @@ public class SurroundingCellsShould {
     }
 
     @Test
-    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
     public void know_when_all_neighbouring_cells_are_currently_dead() {
         GameOfLife board = mock(GameOfLife.class);
         when(board.contains(any(LiveCell.class))).thenReturn(false);
