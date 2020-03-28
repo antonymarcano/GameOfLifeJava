@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -33,6 +34,22 @@ public class GameOfLifeShould {
         board = nextGenerationOf(board);
 
         assertThat(board.size(), is(0));
+    }
+
+    @Test
+    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
+    public void stay_unchanged_when_four_cells_have_three_live_neighbours_up_and_right() {
+        Set<LiveCell> board = of(
+                LiveCell.at(0,0),
+                LiveCell.at(0,1),
+                LiveCell.at(1,1),
+                LiveCell.at(1,0)
+        );
+        Set<LiveCell> stillLifeBlock = copyOf(board);
+
+        board = nextGenerationOf(board);
+
+        assertThat(board, is(stillLifeBlock));
     }
 
 
