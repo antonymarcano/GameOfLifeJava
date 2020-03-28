@@ -65,4 +65,8 @@ public class GameOfLife {
     public Integer size() {
         return currentBoard.size();
     }
+
+    public boolean contains(LiveCell cell) {
+        return false;
+    }
 }
