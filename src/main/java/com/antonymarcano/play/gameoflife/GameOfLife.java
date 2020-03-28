@@ -1,6 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 import java.util.AbstractMap.SimpleEntry;
 import java.util.HashSet;
@@ -10,22 +11,27 @@ import static java.util.Set.copyOf;
 import static java.util.Set.of;
 
 @EqualsAndHashCode
+@ToString
 public class GameOfLife {
     private Set<LiveCell> currentBoard;
 
     public static final Set<SimpleEntry<Integer, Integer>> POTENTIAL_NEIGHBOURS = of(
-            new SimpleEntry<>(0, 1), //top middle
-            new SimpleEntry<>(1, 1), //top right
-            new SimpleEntry<>(1, 0), //middle right
-            new SimpleEntry<>(1, -1), //bottom right
+            new SimpleEntry<>( 0, 1), //top middle
+            new SimpleEntry<>( 1, 1), //top right
+            new SimpleEntry<>( 1, 0), //middle right
+            new SimpleEntry<>( 1,-1), //bottom right
             new SimpleEntry<>(-1, 0), //bottom middle
-            new SimpleEntry<>(-1, -1), //bottom left
-            new SimpleEntry<>(0, -1), //middle left
+            new SimpleEntry<>(-1,-1), //bottom left
+            new SimpleEntry<>( 0,-1), //middle left
             new SimpleEntry<>(-1, 1)  //top left
     );
 
-    public GameOfLife(LiveCell... cells) {
-        currentBoard = Set.of(cells);
+    public GameOfLife(Set<LiveCell> cells) {
+        currentBoard = copyOf(cells);
+    }
+
+    public static GameOfLife with(Set<LiveCell> cells) {
+        return new GameOfLife(cells);
     }
 
     public GameOfLife nextGeneration() {

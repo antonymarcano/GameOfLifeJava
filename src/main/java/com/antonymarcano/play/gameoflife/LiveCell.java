@@ -1,8 +1,10 @@
 package com.antonymarcano.play.gameoflife;
 
 import lombok.EqualsAndHashCode;
+import lombok.ToString;
 
 @EqualsAndHashCode
+@ToString
 public class LiveCell {
     private final int x;
     private final int y;
@@ -17,12 +19,4 @@ public class LiveCell {
 
     public int x() { return x; }
     public int y() { return y; }
-
-    @Override
-    public String toString() {
-        return "LiveCell{" +
-                "x=" + x +
-                ", y=" + y +
-                '}';
-    }
 }
