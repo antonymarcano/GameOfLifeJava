@@ -1,26 +1,15 @@
 package com.antonymarcano.play.gameoflife;
 
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
-
-@EqualsAndHashCode
-@ToString
-public class LiveCell {
-    private final int x;
-    private final int y;
-
+public class LiveCell extends Cell {
     public static LiveCell at(int x, int y) {
         return new LiveCell(x,y);
     }
 
     public LiveCell(int x, int y) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
     }
-    public int x() { return x; }
-    public int y() { return y; }
 
     public boolean survivesInNeighbourhoodOf(int neighbours) {
-        return neighbours == 3;
+        return neighbours >= 2 && neighbours <= 3;
     }
 }

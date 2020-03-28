@@ -13,4 +13,11 @@ public class LiveCellShould {
 
         assertThat(cell.survivesInNeighbourhoodOf(3), is(true));
     }
+
+    @Test
+    public void survive_with_two_live_neighbours() {
+        LiveCell cell = LiveCell.at(0, 0);
+
+        assertThat(cell.survivesInNeighbourhoodOf(2), is(true));
+    }
 }
