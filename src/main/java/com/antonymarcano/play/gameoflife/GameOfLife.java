@@ -63,4 +63,8 @@ public class GameOfLife {
     public Integer size() {
         return currentBoard.size();
     }
+
+    public Integer countNeighboursOf(LiveCell cell) {
+        return 0;
+    }
 }

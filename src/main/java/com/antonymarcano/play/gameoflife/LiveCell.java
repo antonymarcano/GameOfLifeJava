@@ -19,4 +19,8 @@ public class LiveCell {
 
     public int x() { return x; }
     public int y() { return y; }
+
+    public boolean shouldLiveOn(GameOfLife board) {
+        return false;
+    }
 }
