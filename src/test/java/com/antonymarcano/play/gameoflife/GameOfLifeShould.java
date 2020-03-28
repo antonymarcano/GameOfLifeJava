@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -39,6 +40,21 @@ public class GameOfLifeShould {
                 LiveCell.at(0, 1),
                 LiveCell.at(1, 1),
                 LiveCell.at(1, 0)
+        );
+        GameOfLife board = GameOfLife.with(stillLifeBlock);
+
+        board = board.nextGeneration();
+
+        assertThat(board, is(GameOfLife.with(stillLifeBlock)));
+    }
+
+    @Test
+    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
+    public void get_a_still_life_block_from_L_shaped_seed() {
+        Set<LiveCell> stillLifeBlock = Set.of(
+                LiveCell.at(0, 0),
+                LiveCell.at(0, 1),
+                LiveCell.at(1, 1)
         );
         GameOfLife board = GameOfLife.with(stillLifeBlock);
 
