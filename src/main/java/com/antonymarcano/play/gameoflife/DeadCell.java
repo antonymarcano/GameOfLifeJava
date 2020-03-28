@@ -8,4 +8,8 @@ public class DeadCell extends Cell {
     public static DeadCell at(int x, int y) {
         return new DeadCell(x,y);
     }
+
+    public boolean shouldBeBornInNeighbourhoodOf(int numberOfNeighbours) {
+        return true;
+    }
 }
