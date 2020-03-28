@@ -10,6 +10,6 @@ public class DeadCell extends Cell {
     }
 
     public boolean shouldBeBornInNeighbourhoodOf(int numberOfNeighbours) {
-        return true;
+        return numberOfNeighbours == 3;
     }
 }

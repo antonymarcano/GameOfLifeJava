@@ -1,6 +1,5 @@
 package com.antonymarcano.play.gameoflife;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,10 +15,16 @@ public class DeadCellShould {
     }
 
     @Test
-    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
-    public void not_be_reborn_with_less_then_three_live_neighbours() {
+    public void not_be_reborn_with_less_than_three_live_neighbours() {
         DeadCell cell = DeadCell.at(0, 0);
 
         assertThat(cell.shouldBeBornInNeighbourhoodOf(2), is(false));
+    }
+
+    @Test
+    public void not_be_reborn_with_more_than_three_live_neighbours() {
+        DeadCell cell = DeadCell.at(0, 0);
+
+        assertThat(cell.shouldBeBornInNeighbourhoodOf(4), is(false));
     }
 }
