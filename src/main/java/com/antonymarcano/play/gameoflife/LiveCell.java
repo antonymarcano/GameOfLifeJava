@@ -1,7 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.SurroundingCells;
 import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
-import com.antonymarcano.play.gameoflife.neighbourhood.Neighbours;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -16,11 +16,11 @@ public class LiveCell {
     }
 
     public boolean shouldNotSurvive(GameOfLife board) {
-        Neighbours neighbours = Neighbourhood
+        Neighbourhood population = SurroundingCells
                 .of(this)
                 .on(board);
 
-        return !(neighbours.size() == 3);
+        return !(population.size() == 3);
     }
 
     public LiveCell(int x, int y) {

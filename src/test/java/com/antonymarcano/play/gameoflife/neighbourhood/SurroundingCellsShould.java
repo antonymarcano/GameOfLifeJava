@@ -10,7 +10,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class NeighbourhoodShould {
+public class SurroundingCellsShould {
 
     @Test
     public void have_size_of_eight_when_a_cell_is_surrounded() {
@@ -19,7 +19,7 @@ public class NeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0,0);
 
-        Neighbours neighbours = Neighbourhood.of(cell).on(board);
+        Neighbourhood neighbours = SurroundingCells.of(cell).on(board);
         assertThat(neighbours.size(), is(8));
     }
 
@@ -30,7 +30,7 @@ public class NeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0,0);
 
-        Neighbours neighbours = Neighbourhood.of(cell).on(board);
+        Neighbourhood neighbours = SurroundingCells.of(cell).on(board);
         assertThat(neighbours.size(), is(0));
     }
 }
