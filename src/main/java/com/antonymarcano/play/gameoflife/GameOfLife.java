@@ -46,15 +46,20 @@ public class GameOfLife {
     }
 
     public Integer countNeighboursOf(LiveCell cell) {
-        int count = 0;
-        for (SimpleEntry<Integer, Integer> neighbour : RELATIVE_POSITION_OF_NEIGHBOURS) {
-            int x = cell.x() + neighbour.getKey();
-            int y = cell.y() + neighbour.getValue();
-            LiveCell potentialNeighbour = new LiveCell(x, y);
+        return neighboursOf(cell).size();
+    }
 
-            if (currentBoard.contains(potentialNeighbour)) count++;
+    private Set<LiveCell> neighboursOf(LiveCell cell) {
+        Set<LiveCell> neighbours = new HashSet<>();
+
+        for (SimpleEntry<Integer, Integer> neighbourOffset : RELATIVE_POSITION_OF_NEIGHBOURS) {
+            int x = cell.x() + neighbourOffset.getKey();
+            int y = cell.y() + neighbourOffset.getValue();
+            LiveCell neighbour = new LiveCell(x, y);
+
+            if (currentBoard.contains(neighbour)) neighbours.add(neighbour);
         }
-        return count;
+        return neighbours;
     }
 
     public Integer size() {
