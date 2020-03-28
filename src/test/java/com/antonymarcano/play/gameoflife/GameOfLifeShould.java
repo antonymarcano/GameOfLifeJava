@@ -1,6 +1,5 @@
 package com.antonymarcano.play.gameoflife;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -25,7 +24,6 @@ public class GameOfLifeShould {
     }
 
     @Test
-    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
     public void have_no_live_cells_when_seeded_with_only_two_live_cells() {
         Set<LiveCell> board = of(
                 LiveCell.at(0,0),
@@ -40,7 +38,7 @@ public class GameOfLifeShould {
 
     private Set<LiveCell> nextGenerationOf(Set<LiveCell> board) {
         Set<LiveCell> draftBoard = new HashSet<>(board);
-        draftBoard.remove(LiveCell.at(0, 0));
+        draftBoard.removeAll(board);
         board = copyOf(draftBoard);
         return board;
     }
