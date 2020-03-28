@@ -1,5 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
+import com.antonymarcano.play.gameoflife.neighbourhood.SurroundingCells;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -25,10 +27,16 @@ public class GameOfLife {
     }
 
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
-        Set<LiveCell> draftBoard = new HashSet<>(board.currentBoard);
+        return survivorsFrom(currentBoard);
+    }
 
-        for (LiveCell cell : currentBoard) {
-            if (cell.shouldNotSurvive(this)) draftBoard.remove(cell);
+    private Set<LiveCell> survivorsFrom(Set<LiveCell> board) {
+        Set<LiveCell> draftBoard = new HashSet<>();
+
+        for (LiveCell cell : board) {
+            Neighbourhood neighbourhood = SurroundingCells.of(cell).on(this);
+            int size = neighbourhood.size();
+            if (cell.survivesInNeighbourhoodOf(size)) draftBoard.add(cell);
         }
         return draftBoard;
     }
