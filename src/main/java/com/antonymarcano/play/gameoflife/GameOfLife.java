@@ -42,29 +42,24 @@ public class GameOfLife {
         Set<LiveCell> draftBoard = new HashSet<>(board.currentBoard);
 
         for (LiveCell cell : currentBoard) {
-            if (numberOfNeighboursOn(currentBoard, cell) == 3) continue;
-            draftBoard.remove(cell);
+            if (cell.shouldNotSurvive(this)) draftBoard.remove(cell);
         }
         return draftBoard;
     }
 
-    private int numberOfNeighboursOn(Set<LiveCell> board, LiveCell cell) {
+    public Integer countNeighboursOf(LiveCell cell) {
         int count = 0;
         for (SimpleEntry<Integer, Integer> neighbour : POTENTIAL_NEIGHBOURS) {
             int x = cell.x() + neighbour.getKey();
             int y = cell.y() + neighbour.getValue();
             LiveCell potentialNeighbour = new LiveCell(x, y);
 
-            if (board.contains(potentialNeighbour)) count++;
+            if (currentBoard.contains(potentialNeighbour)) count++;
         }
         return count;
     }
 
     public Integer size() {
         return currentBoard.size();
-    }
-
-    public Integer countNeighboursOf(LiveCell cell) {
-        return 0;
     }
 }

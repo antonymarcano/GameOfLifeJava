@@ -20,7 +20,7 @@ public class LiveCell {
     public int x() { return x; }
     public int y() { return y; }
 
-    public boolean shouldLiveOn(GameOfLife board) {
-        return false;
+    public boolean shouldNotSurvive(GameOfLife board) {
+        return !(board.countNeighboursOf(this) == 3);
     }
 }
