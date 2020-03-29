@@ -13,5 +13,4 @@ public class DeadCell extends Cell {
     public boolean shouldBeAliveInNeighbourhoodOf(int numberOfNeighbours) {
         return numberOfNeighbours == 3;
     }
-
 }

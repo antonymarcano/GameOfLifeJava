@@ -34,7 +34,7 @@ public class GameOfLife {
 
             for (Cell cell : cellsInNeighbourhood ) {
                 Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
-                int size = neighbourhood.size();
+                int size = neighbourhood.population();
                 if (cell.shouldBeAliveInNeighbourhoodOf(size)) livingCells.add(LiveCell.at(cell.x(), cell.y()));
             }
         }

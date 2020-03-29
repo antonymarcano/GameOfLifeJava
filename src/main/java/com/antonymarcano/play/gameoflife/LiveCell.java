@@ -10,7 +10,12 @@ public class LiveCell extends Cell {
     }
 
     @Override
-    public boolean shouldBeAliveInNeighbourhoodOf(int neighbours) {
-        return (neighbours -1) >= 2 && (neighbours -1)  <= 3;
+    public boolean shouldBeAliveInNeighbourhoodOf(int population) {
+        return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
+    }
+
+    private int neighboursIn(int population) {
+        int me = 1;
+        return population - me;
     }
 }

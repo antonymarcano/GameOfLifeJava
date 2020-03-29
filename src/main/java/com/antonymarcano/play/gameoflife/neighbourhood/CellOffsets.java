@@ -1,6 +1,6 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-public enum RelativePositionOfNeighbours {
+public enum CellOffsets {
     CENTRE_CELL   (0,0),
     TOP_MIDDLE    ( 0,  1),
     TOP_RIGHT     ( 1,  1),
@@ -13,7 +13,7 @@ public enum RelativePositionOfNeighbours {
 
     private final int x;
     private final int y;
-    RelativePositionOfNeighbours(int x, int y) {
+    CellOffsets(int x, int y) {
         this.x = x;
         this.y = y;
     }

@@ -33,7 +33,7 @@ public class GameOfLifeShould {
     }
 
     @Test
-    public void stay_unchanged_when_four_cells_have_three_live_neighbours_up_and_right() {
+    public void stay_unchanged_when_four_cells_have_three_live_neighbours() {
         Set<LiveCell> stillLifeBlock = Set.of(
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),

@@ -21,7 +21,7 @@ public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
 
     @Override
     public Neighbourhood on(GameOfLife board) {
-        stream(RelativePositionOfNeighbours.values()).forEach(offSet -> {
+        stream(CellOffsets.values()).forEach(offSet -> {
             int x = cell.x() + offSet.x();
             int y = cell.y() + offSet.y();
             LiveCell potentialLiveCell = new LiveCell(x, y);
@@ -35,7 +35,7 @@ public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
     }
 
     @Override
-    public int size() {
+    public int population() {
         return aliveInNeighbourhood.size();
     }
 
@@ -50,5 +50,4 @@ public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
     public EntireNeighbourhood(Cell cell) {
         this.cell = cell;
     }
-
 }

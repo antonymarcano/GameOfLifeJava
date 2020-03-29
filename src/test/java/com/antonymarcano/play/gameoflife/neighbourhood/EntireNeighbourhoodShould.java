@@ -17,25 +17,27 @@ import static org.mockito.Mockito.when;
 public class EntireNeighbourhoodShould {
 
     @Test
-    public void have_size_of_eight_when_a_cell_is_surrounded() {
+    public void have_population_of_nine_when_a_living_cell_is_surrounded_by_eight_living_neighbours() {
         GameOfLife board = mock(GameOfLife.class);
         when(board.contains(any(LiveCell.class))).thenReturn(true);
 
         LiveCell cell = LiveCell.at(0, 0);
 
         Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
-        assertThat(neighbourhood.size(), is(9));
+        assertThat(neighbourhood.population(), is(9));
     }
 
     @Test
-    public void have_size_of_zero_when_a_cell_is_surrounded_by_empty_cells() {
+    public void have_population_of_one_when_a_live_cell_is_surrounded_by_eight_empty_cells() {
         GameOfLife board = mock(GameOfLife.class);
-        when(board.contains(any(LiveCell.class))).thenReturn(false);
+        when(board.contains(any(LiveCell.class)))
+                .thenReturn(true)
+                .thenReturn(false);
 
         LiveCell cell = LiveCell.at(0, 0);
 
         Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
-        assertThat(neighbourhood.size(), is(0));
+        assertThat(neighbourhood.population(), is(1));
     }
 
     @Test
@@ -47,16 +49,16 @@ public class EntireNeighbourhoodShould {
         Set<? extends Cell> cells = EntireNeighbourhood.of(cell).on(board).all();
 
         Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
-                DeadCell.at( 0,  1),
-                DeadCell.at( 1,  1),
-                DeadCell.at( 1,  0),
-                DeadCell.at( 1, -1),
-                DeadCell.at( -1 ,0),
-                DeadCell.at( -1,-1),
-                DeadCell.at(  0, -1),
-                DeadCell.at( -1, 1 ),
-                LiveCell.at(0,0)
-                );
+                LiveCell.at(0, 0),
+                DeadCell.at(0, 1),
+                DeadCell.at(1, 1),
+                DeadCell.at(1, 0),
+                DeadCell.at(1, -1),
+                DeadCell.at(-1, 0),
+                DeadCell.at(-1, -1),
+                DeadCell.at(0, -1),
+                DeadCell.at(-1, 1)
+        );
         assertThat(cells, is(expectedCellsInNeighbourhood));
     }
 }

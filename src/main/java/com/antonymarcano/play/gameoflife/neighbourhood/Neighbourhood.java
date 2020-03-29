@@ -5,6 +5,6 @@ import com.antonymarcano.play.gameoflife.Cell;
 import java.util.Set;
 
 public interface Neighbourhood {
-    int size();
+    int population();
     Set<? extends Cell> all();
 }
