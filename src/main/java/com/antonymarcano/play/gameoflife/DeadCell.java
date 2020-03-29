@@ -9,7 +9,9 @@ public class DeadCell extends Cell {
         return new DeadCell(x,y);
     }
 
-    public boolean shouldBeBornInNeighbourhoodOf(int numberOfNeighbours) {
+    @Override
+    public boolean shouldBeAliveInNeighbourhoodOf(int numberOfNeighbours) {
         return numberOfNeighbours == 3;
     }
+
 }

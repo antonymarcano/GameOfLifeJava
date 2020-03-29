@@ -10,13 +10,13 @@ import java.util.Set;
 
 import static java.util.Arrays.stream;
 
-public class SurroundingCells implements Neighbourhood, NeedsABoard {
-    private LiveCell cell;
-    private Set<LiveCell> livingNeighbours = new HashSet<>();
+public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
+    private Cell cell;
+    private Set<LiveCell> aliveInNeighbourhood = new HashSet<>();
     private Set<DeadCell> deadNeighbours = new HashSet<>();
 
-    public static NeedsABoard of(LiveCell cell) {
-        return new SurroundingCells(cell);
+    public static NeedsABoard of(Cell cell) {
+        return new EntireNeighbourhood(cell);
     }
 
     @Override
@@ -24,9 +24,9 @@ public class SurroundingCells implements Neighbourhood, NeedsABoard {
         stream(RelativePositionOfNeighbours.values()).forEach(offSet -> {
             int x = cell.x() + offSet.x();
             int y = cell.y() + offSet.y();
-            LiveCell neighbour = new LiveCell(x, y);
-            if (board.contains(neighbour)) {
-                livingNeighbours.add(neighbour);
+            LiveCell potentialLiveCell = new LiveCell(x, y);
+            if (board.contains(potentialLiveCell)) {
+                aliveInNeighbourhood.add(potentialLiveCell);
             } else {
                 deadNeighbours.add(DeadCell.at(x,y));
             }
@@ -36,18 +36,18 @@ public class SurroundingCells implements Neighbourhood, NeedsABoard {
 
     @Override
     public int size() {
-        return livingNeighbours.size();
+        return aliveInNeighbourhood.size();
     }
 
     @Override
     public Set<? extends Cell> all() {
         Set<Cell> neighbours = new HashSet<>();
-        neighbours.addAll(livingNeighbours);
+        neighbours.addAll(aliveInNeighbourhood);
         neighbours.addAll(deadNeighbours);
         return neighbours;
     }
 
-    public SurroundingCells(LiveCell cell) {
+    public EntireNeighbourhood(Cell cell) {
         this.cell = cell;
     }
 

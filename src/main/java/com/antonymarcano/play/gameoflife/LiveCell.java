@@ -9,7 +9,8 @@ public class LiveCell extends Cell {
         super(x, y);
     }
 
-    public boolean survivesInNeighbourhoodOf(int neighbours) {
-        return neighbours >= 2 && neighbours <= 3;
+    @Override
+    public boolean shouldBeAliveInNeighbourhoodOf(int neighbours) {
+        return (neighbours -1) >= 2 && (neighbours -1)  <= 3;
     }
 }

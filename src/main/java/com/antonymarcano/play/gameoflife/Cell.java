@@ -16,4 +16,6 @@ public abstract class Cell {
 
     public int x() { return x; }
     public int y() { return y; }
+
+    public abstract boolean shouldBeAliveInNeighbourhoodOf(int numberOfNeighbours);
 }

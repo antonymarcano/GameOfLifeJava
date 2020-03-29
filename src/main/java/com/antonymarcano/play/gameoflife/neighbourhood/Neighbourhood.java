@@ -6,6 +6,5 @@ import java.util.Set;
 
 public interface Neighbourhood {
     int size();
-
     Set<? extends Cell> all();
 }

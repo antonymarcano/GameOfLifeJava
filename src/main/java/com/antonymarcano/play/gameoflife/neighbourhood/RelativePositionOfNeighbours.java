@@ -1,6 +1,7 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
 public enum RelativePositionOfNeighbours {
+    CENTRE_CELL   (0,0),
     TOP_MIDDLE    ( 0,  1),
     TOP_RIGHT     ( 1,  1),
     MIDDLE_RIGHT  ( 1,  0),

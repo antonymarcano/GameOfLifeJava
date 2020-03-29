@@ -1,6 +1,5 @@
 package com.antonymarcano.play.gameoflife;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -49,7 +48,6 @@ public class GameOfLifeShould {
     }
 
     @Test
-    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
     public void get_a_still_life_block_from_L_shaped_seed() {
         Set<LiveCell> rightAngle = Set.of(
                 LiveCell.at(0, 0),

@@ -14,7 +14,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class SurroundingCellsShould {
+public class EntireNeighbourhoodShould {
 
     @Test
     public void have_size_of_eight_when_a_cell_is_surrounded() {
@@ -23,8 +23,8 @@ public class SurroundingCellsShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbours = SurroundingCells.of(cell).on(board);
-        assertThat(neighbours.size(), is(8));
+        Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
+        assertThat(neighbourhood.size(), is(9));
     }
 
     @Test
@@ -34,8 +34,8 @@ public class SurroundingCellsShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbours = SurroundingCells.of(cell).on(board);
-        assertThat(neighbours.size(), is(0));
+        Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
+        assertThat(neighbourhood.size(), is(0));
     }
 
     @Test
@@ -44,9 +44,9 @@ public class SurroundingCellsShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> neighbours = SurroundingCells.of(cell).on(board).all();
+        Set<? extends Cell> cells = EntireNeighbourhood.of(cell).on(board).all();
 
-        Set<? extends Cell> expectedNeighbours = Set.of(
+        Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
                 DeadCell.at( 0,  1),
                 DeadCell.at( 1,  1),
                 DeadCell.at( 1,  0),
@@ -54,8 +54,9 @@ public class SurroundingCellsShould {
                 DeadCell.at( -1 ,0),
                 DeadCell.at( -1,-1),
                 DeadCell.at(  0, -1),
-                DeadCell.at( -1, 1 )
+                DeadCell.at( -1, 1 ),
+                LiveCell.at(0,0)
                 );
-        assertThat(neighbours, is(expectedNeighbours));
+        assertThat(cells, is(expectedCellsInNeighbourhood));
     }
 }
