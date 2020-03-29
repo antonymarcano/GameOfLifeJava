@@ -1,4 +1,4 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
 import org.junit.Test;
 

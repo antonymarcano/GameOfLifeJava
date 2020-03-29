@@ -1,18 +1,12 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.Cell;
-import com.antonymarcano.play.gameoflife.DeadCell;
+import com.antonymarcano.play.gameoflife.cell.Cell;
+import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
-import com.antonymarcano.play.gameoflife.LiveCell;
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 
 import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
-
-import static java.util.Arrays.stream;
-import static java.util.stream.Collectors.partitioningBy;
-import static java.util.stream.Collectors.toSet;
 
 public class EntireNeighbourhood implements Neighbourhood, NeedsACell {
     private final GameOfLife board;
@@ -24,44 +18,27 @@ public class EntireNeighbourhood implements Neighbourhood, NeedsACell {
     }
     private EntireNeighbourhood(GameOfLife board) { this.board = board; }
 
+    @Override
     public Neighbourhood of(Cell cell) {
-        Map<Boolean, List<LiveCell>> neighbourhoodCensus = surveyNeighbourhoodOf(cell);
+        Survey census = Survey.within(board).startingFrom(cell);
 
-        populatedCells = occupiedAddressesFrom(neighbourhoodCensus);
-        vacantCells = vacantAddressesFrom(neighbourhoodCensus);
+        populatedCells = census.occupiedAddresses();
+        vacantCells = census.vacantAddresses();
 
         return this;
     }
-    
-    private Map<Boolean, List<LiveCell>> surveyNeighbourhoodOf(Cell cell) {
-        return stream(CellOffsets.values())
-                .map(offset -> LiveCell.at(cell, offset))
-                .collect(partitioningBy(board::contains));
-    }
-
-    private Set<LiveCell> occupiedAddressesFrom(Map<Boolean, List<LiveCell>> neighbourhoodCensus) {
-        return new HashSet<>(neighbourhoodCensus.get(true));
-    }
-
-    private Set<DeadCell> vacantAddressesFrom(Map<Boolean, List<LiveCell>> neighbourhoodCensus) {
-        return neighbourhoodCensus.get(false).stream()
-                .map(EntireNeighbourhood::deadCells)
-                .collect(toSet());
-    }
-
-    private static DeadCell deadCells(LiveCell c) { return DeadCell.at(c.x(), c.y()); }
 
     @Override
     public int population() {
         return populatedCells.size();
     }
 
-    public static Set<? extends Cell> entire(Neighbourhood cells) {return cells.all();}
+    public static Set<? extends Cell> entire(Neighbourhood addresses) {return addresses.all();}
     @Override
     public Set<? extends Cell> all() {
-        Set<Cell> neighbours = new HashSet<>();
-        neighbours.addAll(populatedCells);
-        neighbours.addAll(vacantCells);
-        return neighbours;
+        return new HashSet<>(){{
+                addAll(populatedCells);
+                addAll(vacantCells);
+            }};
     }
 }

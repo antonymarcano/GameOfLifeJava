@@ -1,9 +1,9 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.Cell;
-import com.antonymarcano.play.gameoflife.DeadCell;
+import com.antonymarcano.play.gameoflife.cell.Cell;
+import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
-import com.antonymarcano.play.gameoflife.LiveCell;
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
 
 import java.util.Set;

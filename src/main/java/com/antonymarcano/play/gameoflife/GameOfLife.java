@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
 import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
 import lombok.EqualsAndHashCode;

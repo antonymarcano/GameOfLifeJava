@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
 
 import java.util.Set;

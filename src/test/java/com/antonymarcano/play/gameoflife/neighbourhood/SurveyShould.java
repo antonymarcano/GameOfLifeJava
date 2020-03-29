@@ -1,8 +1,8 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.DeadCell;
+import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
-import com.antonymarcano.play.gameoflife.LiveCell;
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
 
 import java.util.Set;
@@ -19,7 +19,7 @@ public class SurveyShould {
                 oneLivingCell
         ));
 
-        Survey census = new Survey(board).areaAround(oneLivingCell);
+        Survey census = Survey.within(board).startingFrom(oneLivingCell);
 
         assertThat(census.occupiedAddresses(), is(Set.of(LiveCell.at(0,0))));
     }
@@ -31,7 +31,7 @@ public class SurveyShould {
                 oneLivingCell
         ));
 
-        Survey census = new Survey(board).areaAround(oneLivingCell);
+        Survey census = Survey.within(board).startingFrom(oneLivingCell);
 
         Set<DeadCell> expectedVacantAddresses = Set.of(
                 DeadCell.at(0, 1),

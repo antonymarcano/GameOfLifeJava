@@ -1,6 +1,6 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
-import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
 
 import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.BOTTOM_LEFT;

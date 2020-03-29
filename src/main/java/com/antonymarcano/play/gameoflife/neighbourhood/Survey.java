@@ -1,8 +1,9 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.Cell;
+import com.antonymarcano.play.gameoflife.cell.Cell;
+import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
-import com.antonymarcano.play.gameoflife.LiveCell;
+import com.antonymarcano.play.gameoflife.cell.LiveCell;
 
 import java.util.HashSet;
 import java.util.List;
@@ -11,31 +12,41 @@ import java.util.Set;
 
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.partitioningBy;
+import static java.util.stream.Collectors.toSet;
 
-public class Survey {
+public class Survey implements NeedsAPlaceToStart {
     private GameOfLife board;
-    private Map<Boolean, List<LiveCell>> survey;
+    private Set<LiveCell> occupiedAddresses;
+    private Set<DeadCell> vacantAddresses;
 
-    public Survey(GameOfLife board) {
+    public static NeedsAPlaceToStart within(GameOfLife board) {
+        return new Survey(board);
+    }
+    private Survey(GameOfLife board) {
         this.board = board;
     }
 
-    public Survey areaAround(LiveCell cell) {
-        survey = surveyNeighbourhoodOf(cell);
+    @Override
+    public Survey startingFrom(Cell cell) {
+        Map<Boolean, List<LiveCell>> survey = surveyNeighbourhoodOf(cell);
+        occupiedAddresses = occupiedAddressesFrom(survey);
+        vacantAddresses = vacantAddressesFrom(survey);
         return this;
     }
-
-    public Set<LiveCell> occupiedAddresses() {
-        return new HashSet<>(survey.get(true));
-    }
+    public Set<LiveCell> occupiedAddresses() { return occupiedAddresses; }
+    public Set<DeadCell> vacantAddresses() { return vacantAddresses; }
 
     private Map<Boolean, List<LiveCell>> surveyNeighbourhoodOf(Cell cell) {
         return stream(CellOffsets.values())
                 .map(offset -> LiveCell.at(cell, offset))
                 .collect(partitioningBy(board::contains));
     }
-
-    public Set<LiveCell> vacantAddresses() {
-        return new HashSet<>(survey.get(false));
+    private Set<LiveCell> occupiedAddressesFrom(Map<Boolean, List<LiveCell>> survey) {
+        return new HashSet<>(survey.get(true));
+    }
+    private Set<DeadCell> vacantAddressesFrom(Map<Boolean, List<LiveCell>> survey) {
+        return survey.get(false).stream()
+                .map(c -> DeadCell.at(c.x(), c.y()))
+                .collect(toSet());
     }
 }

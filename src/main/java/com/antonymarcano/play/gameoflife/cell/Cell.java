@@ -1,4 +1,4 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
 import lombok.EqualsAndHashCode;
 import lombok.ToString;

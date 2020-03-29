@@ -1,4 +1,4 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
 public class DeadCell extends Cell {
     public DeadCell(int x, int y) {

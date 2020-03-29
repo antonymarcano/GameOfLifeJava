@@ -1,6 +1,6 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.Cell;
+import com.antonymarcano.play.gameoflife.cell.Cell;
 
 import java.util.Set;
 
