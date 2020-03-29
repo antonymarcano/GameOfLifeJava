@@ -26,9 +26,9 @@ public class Neighbourhood implements Community, StillNeedsACell {
         return census.occupiedAddresses().size();
     }
 
-    public static Stream<? extends Cell> forAllCellsIn(Community addresses) {return addresses.all().stream();}
     @Override
     public Set<? extends Cell> all() {
         return census.allAddresses();
     }
+    public static Stream<? extends Cell> forAllCellsIn(Community addresses) { return addresses.all().stream(); }
 }

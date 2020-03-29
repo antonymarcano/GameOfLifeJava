@@ -20,7 +20,7 @@ public class MyCell extends Cell {
     }
 
     @Override
-    public boolean isAllowedToLiveWith(int numberOfNeighbours) {
+    public boolean isAllowedToLiveIn(int numberOfNeighbours) {
         return false;
     }
 }

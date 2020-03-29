@@ -21,5 +21,5 @@ public abstract class Cell {
         y = originalCell.y() + offset.y();
     }
 
-    public abstract boolean isAllowedToLiveWith(int numberOfNeighbours);
+    public abstract boolean isAllowedToLiveIn(int numberOfNeighbours);
 }

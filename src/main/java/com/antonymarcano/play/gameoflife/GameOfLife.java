@@ -1,7 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
-import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
 import com.antonymarcano.play.gameoflife.neighbourhood.StillNeedsACell;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -11,6 +10,7 @@ import java.util.Set;
 
 import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.CURRENT;
 import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.forAllCellsIn;
+import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.of;
 import static java.util.Set.copyOf;
 
 @EqualsAndHashCode
@@ -34,18 +34,14 @@ public class GameOfLife {
 
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
         Set<LiveCell> livingCells = new HashSet<>();
-        StillNeedsACell neighbourhood = Neighbourhood.of(board);
+        StillNeedsACell neighbourhood = of(board);
 
         board.currentBoard.forEach(liveCell ->
                 forAllCellsIn(neighbourhood.ofGiven(liveCell))
-                        .filter(cell -> cell.isAllowedToLiveWith(neighbourhood.ofGiven(cell).population()))
+                        .filter(cell -> cell.isAllowedToLiveIn(neighbourhood.ofGiven(cell).population()))
                         .map(cell -> LiveCell.at(cell, CURRENT))
                         .forEach(livingCells::add));
         return livingCells;
-    }
-
-    public Integer size() {
-        return currentBoard.size();
     }
 
     public boolean contains(LiveCell cell) {

@@ -17,7 +17,7 @@ public class LiveCell extends Cell {
     }
 
     @Override
-    public boolean isAllowedToLiveWith(int population) {
+    public boolean isAllowedToLiveIn(int population) {
         return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
     }
 

@@ -18,7 +18,7 @@ public class GameOfLifeShould {
 
         board = board.nextGeneration();
 
-        assertThat(board.size(), is(0));
+        assertThat(board, is(GameOfLife.with(Set.of())));
     }
 
     @Test
@@ -30,7 +30,7 @@ public class GameOfLifeShould {
 
         board = board.nextGeneration();
 
-        assertThat(board.size(), is(0));
+        assertThat(board, is(GameOfLife.with(Set.of())));
     }
 
     @Test

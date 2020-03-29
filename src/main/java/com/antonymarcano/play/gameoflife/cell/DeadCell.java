@@ -15,7 +15,7 @@ public class DeadCell extends Cell {
     private DeadCell(Cell originalCell, CellOffsets offset) { super(offset, originalCell); }
 
     @Override
-    public boolean isAllowedToLiveWith(int numberOfNeighbours) {
+    public boolean isAllowedToLiveIn(int numberOfNeighbours) {
         return numberOfNeighbours == 3;
     }
 }

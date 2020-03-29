@@ -33,7 +33,6 @@ public class Survey implements NeedsACellToStartSurvey {
     @Override
     public Survey startingFrom(Cell cell) {
         Map<Boolean, List<LiveCell>> survey = surveyNeighbourhoodOf(cell);
-
         occupiedAddresses = occupiedAddressesFrom(survey);
         vacantAddresses = vacantAddressesFrom(survey);
         return this;
