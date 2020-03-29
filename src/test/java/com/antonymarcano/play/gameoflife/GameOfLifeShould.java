@@ -67,4 +67,27 @@ public class GameOfLifeShould {
         );
         assertThat(board, is(GameOfLife.with(stillLifeBlock)));
     }
+
+    @Test //superfluous test but included to illustrate the scope of behaviour
+    public void oscillator_blinker() {
+        Set<LiveCell> horizontalBar = Set.of(
+                LiveCell.at(0, 0),
+                LiveCell.at(1, 0),
+                LiveCell.at(-1, 0)
+        );
+        GameOfLife board = GameOfLife.with(horizontalBar);
+
+        board = board.nextGeneration();
+
+        Set<LiveCell> verticalBar = Set.of(
+                LiveCell.at(0, 0),
+                LiveCell.at(0, 1),
+                LiveCell.at(0, -1)
+        );
+        assertThat(board, is(GameOfLife.with(verticalBar)));
+
+        board = board.nextGeneration();
+
+        assertThat(board, is(GameOfLife.with(horizontalBar)));
+    }
 }
