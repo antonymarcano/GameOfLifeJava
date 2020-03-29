@@ -1,6 +1,5 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
-import com.antonymarcano.play.gameoflife.cell.Cell;
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
 
 public class MyCell extends Cell {

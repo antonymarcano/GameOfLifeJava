@@ -1,4 +1,4 @@
-package com.antonymarcano.play.gameoflife;
+package com.antonymarcano.play.gameoflife.cell;
 
 import org.junit.Test;
 
@@ -8,7 +8,7 @@ import static org.junit.Assert.assertThat;
 
 public class AnyCellShould {
     @Test
-    public void be_created_from_an_offset() {
+    public void be_able_to_be_created_from_an_offset() {
         MyCell originalCell = MyCell.at(0,0);
 
         MyCell cell = MyCell.at(BOTTOM_LEFT, originalCell);
