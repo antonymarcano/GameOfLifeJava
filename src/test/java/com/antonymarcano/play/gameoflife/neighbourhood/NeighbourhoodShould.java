@@ -8,14 +8,14 @@ import org.junit.Test;
 
 import java.util.Set;
 
-import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.*;
+import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.*;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-public class EntireNeighbourhoodShould {
+public class NeighbourhoodShould {
 
     @Test
     public void have_population_of_nine_when_a_living_cell_is_surrounded_by_eight_living_neighbours() {
@@ -24,8 +24,8 @@ public class EntireNeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbourhood = on(board).of(cell);
-        assertThat(neighbourhood.population(), is(9));
+        Community community = of(board).forGiven(cell);
+        assertThat(community.population(), is(9));
     }
 
     @Test
@@ -37,8 +37,8 @@ public class EntireNeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbourhood = on(board).of(cell);
-        assertThat(neighbourhood.population(), is(1));
+        Community community = of(board).forGiven(cell);
+        assertThat(community.population(), is(1));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class EntireNeighbourhoodShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> cells = entire(on(board).of(cell));
+        Set<? extends Cell> neighbourhood = of(board).forGiven(cell).all();
 
         Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
                 LiveCell.at(0, 0),
@@ -60,6 +60,6 @@ public class EntireNeighbourhoodShould {
                 DeadCell.at(0, -1),
                 DeadCell.at(-1, 1)
         );
-        assertThat(cells, is(expectedCellsInNeighbourhood));
+        assertThat(neighbourhood, is(expectedCellsInNeighbourhood));
     }
 }

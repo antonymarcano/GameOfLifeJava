@@ -1,0 +1,27 @@
+package com.antonymarcano.play.gameoflife;
+
+import com.antonymarcano.play.gameoflife.cell.Cell;
+import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
+
+public class MyCell extends Cell {
+    public static MyCell at(int x, int y) {
+        return new MyCell(x,y);
+    }
+
+    public static MyCell at(CellOffsets offset, Cell originalCell) {
+        return new MyCell(offset,originalCell);
+    }
+
+    protected MyCell(int x, int y) {
+        super(x, y);
+    }
+
+    public MyCell(CellOffsets offset, Cell originalCell) {
+        super(offset, originalCell);
+    }
+
+    @Override
+    public boolean isAllowedToLiveWith(int numberOfNeighbours) {
+        return false;
+    }
+}

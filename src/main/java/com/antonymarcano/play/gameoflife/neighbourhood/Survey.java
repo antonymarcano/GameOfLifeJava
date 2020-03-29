@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.CURRENT;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toSet;
@@ -46,7 +47,7 @@ public class Survey implements NeedsAPlaceToStart {
     }
     private Set<DeadCell> vacantAddressesFrom(Map<Boolean, List<LiveCell>> survey) {
         return survey.get(false).stream()
-                .map(c -> DeadCell.at(c.x(), c.y()))
+                .map(cell -> DeadCell.at(CURRENT, cell))
                 .collect(toSet());
     }
 }

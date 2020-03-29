@@ -3,22 +3,19 @@ package com.antonymarcano.play.gameoflife.cell;
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
 
 public class LiveCell extends Cell {
-    private LiveCell(int x, int y) {
-        super(x, y);
-    }
-
     public static LiveCell at(int x, int y) {
         return new LiveCell(x,y);
     }
-
     public static LiveCell at(Cell originalCell, CellOffsets offset) {
-        int x = originalCell.x() + offset.x();
-        int y = originalCell.y() + offset.y();
-        return LiveCell.at(x,y);
+        return new LiveCell(originalCell, offset);
+    }
+    private LiveCell(int x, int y) { super(x, y); }
+    private LiveCell(Cell originalCell, CellOffsets offset) {
+        super(offset, originalCell);
     }
 
     @Override
-    public boolean shouldBeAliveInNeighbourhoodOf(int population) {
+    public boolean isAllowedToLiveWith(int population) {
         return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
     }
 
