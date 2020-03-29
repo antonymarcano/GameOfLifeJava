@@ -47,7 +47,7 @@ public class EntireNeighbourhoodShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> cells = neighbourhood(on(board).of(cell));
+        Set<? extends Cell> cells = entire(on(board).of(cell));
 
         Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
                 LiveCell.at(0, 0),

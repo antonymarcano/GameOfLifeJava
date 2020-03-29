@@ -1,5 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
 import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -7,7 +8,9 @@ import lombok.ToString;
 import java.util.HashSet;
 import java.util.Set;
 
-import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.*;
+import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.HERE;
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.entire;
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.on;
 import static java.util.Set.copyOf;
 
 @EqualsAndHashCode
@@ -28,13 +31,14 @@ public class GameOfLife {
 
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
         Set<LiveCell> livingCells = new HashSet<>();
+        NeedsACell neighbourhood = on(board);
 
         for (LiveCell liveCell : board.currentBoard()) {
-            for (Cell cell : neighbourhood(on(board).of(liveCell))) {
-                Neighbourhood neighbourhood = on(board).of(cell);
-                int size = neighbourhood.population();
-                if (cell.shouldBeAliveInNeighbourhoodOf(size)) livingCells.add(LiveCell.at(cell.x(), cell.y()));
-            }
+            entire(neighbourhood.of(liveCell)).forEach(cell -> {
+                Neighbourhood area = neighbourhood.of(cell);
+                int size = area.population();
+                if (cell.shouldBeAliveInNeighbourhoodOf(size)) livingCells.add(LiveCell.at(cell, HERE));
+            });
         }
 
         return new HashSet<>(livingCells);
