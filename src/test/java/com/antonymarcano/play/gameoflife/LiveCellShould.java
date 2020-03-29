@@ -1,7 +1,9 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
 import org.junit.Test;
 
+import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.BOTTOM_LEFT;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
@@ -33,5 +35,12 @@ public class LiveCellShould {
         LiveCell cell = LiveCell.at(0, 0);
 
         assertThat(cell.shouldBeAliveInNeighbourhoodOf(5), is(false));
+    }
+
+    @Test
+    public void be_created_from_an_offset() {
+        LiveCell originalCell = LiveCell.at(0,0);
+        LiveCell cell = LiveCell.at(originalCell, BOTTOM_LEFT);
+        assertThat(cell, is(LiveCell.at(-1,-1)));
     }
 }

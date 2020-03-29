@@ -1,5 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
+
 public class LiveCell extends Cell {
     public static LiveCell at(int x, int y) {
         return new LiveCell(x,y);
@@ -7,6 +9,12 @@ public class LiveCell extends Cell {
 
     public LiveCell(int x, int y) {
         super(x, y);
+    }
+
+    public static LiveCell at(LiveCell originalCell, CellOffsets offset) {
+        int x = originalCell.x() + offset.x();
+        int y = originalCell.y() + offset.y();
+        return LiveCell.at(x,y);
     }
 
     @Override
