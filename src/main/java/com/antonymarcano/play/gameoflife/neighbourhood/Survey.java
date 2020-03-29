@@ -34,4 +34,8 @@ public class Survey {
                 .map(offset -> LiveCell.at(cell, offset))
                 .collect(partitioningBy(board::contains));
     }
+
+    public Set<LiveCell> vacantAddresses() {
+        return new HashSet<>(survey.get(false));
+    }
 }
