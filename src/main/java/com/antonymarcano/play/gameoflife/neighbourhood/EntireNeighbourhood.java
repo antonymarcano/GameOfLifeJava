@@ -14,18 +14,14 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toSet;
 
-public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
+public class EntireNeighbourhood implements Neighbourhood, NeedsACell {
+    private final GameOfLife board;
     private Cell cell;
     private Set<LiveCell> populatedCells = new HashSet<>();
     private Set<DeadCell> vacantCells = new HashSet<>();
 
-    public static NeedsABoard of(Cell cell) {
-        return new EntireNeighbourhood(cell);
-    }
-    public EntireNeighbourhood(Cell cell) { this.cell = cell; }
-
-    @Override
-    public Neighbourhood on(GameOfLife board) {
+    public Neighbourhood of(Cell cell) {
+        this.cell = cell;
         Map<Boolean, List<LiveCell>> neighbourhoodCensus =
                 stream(CellOffsets.values())
                         .map(this::potentialCellAt)
@@ -36,6 +32,12 @@ public class EntireNeighbourhood implements Neighbourhood, NeedsABoard {
 
         return this;
     }
+    public EntireNeighbourhood(GameOfLife board) { this.board = board; }
+
+    public static NeedsACell on(GameOfLife board) {
+        return new EntireNeighbourhood(board);
+    }
+
     private LiveCell potentialCellAt(CellOffsets offSet) {
         int x = cell.x() + offSet.x();
         int y = cell.y() + offSet.y();
