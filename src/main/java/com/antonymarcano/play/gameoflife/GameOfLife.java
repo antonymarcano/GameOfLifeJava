@@ -1,13 +1,14 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
-import com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.neighbourhood;
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.of;
 import static java.util.Set.copyOf;
 
 @EqualsAndHashCode
@@ -30,10 +31,8 @@ public class GameOfLife {
         Set<LiveCell> livingCells = new HashSet<>();
 
         for (LiveCell liveCell : board.currentBoard()) {
-            Set<? extends Cell> cellsInNeighbourhood = EntireNeighbourhood.of(liveCell).on(board).all();
-
-            for (Cell cell : cellsInNeighbourhood ) {
-                Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
+            for (Cell cell : neighbourhood(of(liveCell).on(board))) {
+                Neighbourhood neighbourhood = of(cell).on(board);
                 int size = neighbourhood.population();
                 if (cell.shouldBeAliveInNeighbourhoodOf(size)) livingCells.add(LiveCell.at(cell.x(), cell.y()));
             }

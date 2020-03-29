@@ -8,6 +8,8 @@ import org.junit.Test;
 
 import java.util.Set;
 
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.neighbourhood;
+import static com.antonymarcano.play.gameoflife.neighbourhood.EntireNeighbourhood.of;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -23,7 +25,7 @@ public class EntireNeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
+        Neighbourhood neighbourhood = of(cell).on(board);
         assertThat(neighbourhood.population(), is(9));
     }
 
@@ -36,7 +38,7 @@ public class EntireNeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Neighbourhood neighbourhood = EntireNeighbourhood.of(cell).on(board);
+        Neighbourhood neighbourhood = of(cell).on(board);
         assertThat(neighbourhood.population(), is(1));
     }
 
@@ -46,7 +48,7 @@ public class EntireNeighbourhoodShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> cells = EntireNeighbourhood.of(cell).on(board).all();
+        Set<? extends Cell> cells = neighbourhood(of(cell).on(board));
 
         Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
                 LiveCell.at(0, 0),
