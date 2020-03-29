@@ -2,13 +2,14 @@ package com.antonymarcano.play.gameoflife.cell;
 
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
 import lombok.EqualsAndHashCode;
+import lombok.Getter;
 import lombok.ToString;
+import lombok.experimental.Accessors;
 
-@EqualsAndHashCode
-@ToString
+@EqualsAndHashCode @ToString @Accessors(fluent = true)
 public abstract class Cell {
-    protected final int x;
-    protected final int y;
+    @Getter protected final int x;
+    @Getter protected final int y;
 
     protected Cell(int x, int y) {
         this.x = x;
@@ -19,9 +20,6 @@ public abstract class Cell {
         x = originalCell.x() + offset.x();
         y = originalCell.y() + offset.y();
     }
-
-    public int x() { return x; }
-    public int y() { return y; }
 
     public abstract boolean isAllowedToLiveWith(int numberOfNeighbours);
 }

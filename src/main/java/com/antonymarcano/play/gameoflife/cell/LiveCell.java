@@ -3,13 +3,15 @@ package com.antonymarcano.play.gameoflife.cell;
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
 
 public class LiveCell extends Cell {
+
     public static LiveCell at(int x, int y) {
         return new LiveCell(x,y);
     }
+    private LiveCell(int x, int y) { super(x, y); }
+
     public static LiveCell at(Cell originalCell, CellOffsets offset) {
         return new LiveCell(originalCell, offset);
     }
-    private LiveCell(int x, int y) { super(x, y); }
     private LiveCell(Cell originalCell, CellOffsets offset) {
         super(offset, originalCell);
     }
