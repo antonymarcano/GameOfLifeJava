@@ -24,7 +24,9 @@ public class LiveCell extends Cell {
 
     @Override
     public boolean isAllowedToLiveIn(StillNeedsACell neighbourhood) {
-        return false;
+        int population = neighbourhood.ofGiven(this).population();
+
+        return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
     }
 
     private int neighboursIn(int population) {
