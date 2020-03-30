@@ -22,5 +22,11 @@ public abstract class Cell {
         y = originalCell.y() + offset.y();
     }
 
-    public abstract boolean isAllowedToLiveIn(NeedsACell neighbourhood);
+     public abstract boolean isAllowedToLiveIn(NeedsACell neighbourhood);
+
+
+    protected int populationOf(NeedsACell neighbourhood) {
+        return neighbourhood.of(this).population();
+    }
+
 }

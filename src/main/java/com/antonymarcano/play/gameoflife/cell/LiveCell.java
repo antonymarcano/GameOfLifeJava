@@ -19,9 +19,9 @@ public class LiveCell extends Cell {
 
     @Override
     public boolean isAllowedToLiveIn(NeedsACell neighbourhood) {
-        int population = neighbourhood.of(this).population();
+        int neighbours = neighboursIn(populationOf(neighbourhood));
 
-        return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
+        return neighbours >= 2 && neighbours  <= 3;
     }
 
     private int neighboursIn(int population) {

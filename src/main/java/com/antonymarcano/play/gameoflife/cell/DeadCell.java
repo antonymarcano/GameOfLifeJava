@@ -17,8 +17,6 @@ public class DeadCell extends Cell {
 
     @Override
     public boolean isAllowedToLiveIn(NeedsACell neighbourhood) {
-        int numberOfNeighbours = neighbourhood.of(this).population();
-
-        return numberOfNeighbours == 3;
+        return populationOf(neighbourhood) == 3;
     }
 }
