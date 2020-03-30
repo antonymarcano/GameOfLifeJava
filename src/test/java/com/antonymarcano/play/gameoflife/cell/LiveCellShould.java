@@ -53,11 +53,4 @@ public class LiveCellShould {
 
         assertThat(cell.isAllowedToLiveIn(neighbourhood), is(false));
     }
-
-    @Test
-    public void know_whether_it_should_live_in_its_neighbourhood() {
-        when(community.population()).thenReturn(3);
-
-        assertThat(cell.isAllowedToLiveIn(neighbourhood), is(true));
-    }
 }
