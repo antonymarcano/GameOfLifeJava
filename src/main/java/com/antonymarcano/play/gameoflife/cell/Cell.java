@@ -1,6 +1,7 @@
 package com.antonymarcano.play.gameoflife.cell;
 
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
+import com.antonymarcano.play.gameoflife.neighbourhood.StillNeedsACell;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;
@@ -22,4 +23,6 @@ public abstract class Cell {
     }
 
     public abstract boolean isAllowedToLiveIn(int numberOfNeighbours);
+
+    public abstract boolean isAllowedToLiveIn(StillNeedsACell neighbourhood);
 }

@@ -1,9 +1,13 @@
 package com.antonymarcano.play.gameoflife.cell;
 
+import com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LiveCellShould {
 
@@ -33,5 +37,16 @@ public class LiveCellShould {
         LiveCell cell = LiveCell.at(0, 0);
 
         assertThat(cell.isAllowedToLiveIn(5), is(false));
+    }
+
+    @Test
+    @Ignore("Failing Test to illustrate step by step process in commits. Comment out @Ignore line to see it fail.")
+    public void know_whether_it_should_live_in_its_neighbourhood() {
+        LiveCell cell = LiveCell.at(0, 0);
+
+        Neighbourhood neighbourhood = mock(Neighbourhood.class);
+        when(neighbourhood.population()).thenReturn(3);
+
+        assertThat(cell.isAllowedToLiveIn(neighbourhood), is(true));
     }
 }
