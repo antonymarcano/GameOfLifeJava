@@ -1,7 +1,7 @@
 package com.antonymarcano.play.gameoflife.cell;
 
 import com.antonymarcano.play.gameoflife.neighbourhood.Community;
-import com.antonymarcano.play.gameoflife.neighbourhood.StillNeedsACell;
+import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ import static org.mockito.Mockito.when;
 
 public class DeadCellShould {
 
-    private StillNeedsACell neighbourhood;
+    private NeedsACell neighbourhood;
     private Community community;
     private DeadCell cell;
 
@@ -20,10 +20,10 @@ public class DeadCellShould {
     public void establishCommunity() {
         cell = DeadCell.at(0, 0);
 
-        neighbourhood = mock(StillNeedsACell.class);
+        neighbourhood = mock(NeedsACell.class);
         community = mock(Community.class);
 
-        when(neighbourhood.ofGiven(cell)).thenReturn(community);
+        when(neighbourhood.of(cell)).thenReturn(community);
     }
 
     @Test

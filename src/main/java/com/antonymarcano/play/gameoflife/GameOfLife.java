@@ -1,7 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
-import com.antonymarcano.play.gameoflife.neighbourhood.StillNeedsACell;
+import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -10,7 +10,7 @@ import java.util.Set;
 
 import static com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets.CURRENT;
 import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.forAllCellsIn;
-import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.of;
+import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.on;
 import static java.util.Set.copyOf;
 
 @EqualsAndHashCode
@@ -34,11 +34,11 @@ public class GameOfLife {
 
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
         Set<LiveCell> livingCells = new HashSet<>();
-        StillNeedsACell neighbourhood = of(board);
+        NeedsACell neighbourhood = on(board);
 
         board.currentBoard.forEach(liveCell ->
-                forAllCellsIn(neighbourhood.ofGiven(liveCell))
-                        .filter(cell -> cell.isAllowedToLiveIn(neighbourhood.ofGiven(cell).population()))
+                forAllCellsIn(neighbourhood.of(liveCell))
+                        .filter(cell -> cell.isAllowedToLiveIn(neighbourhood))
                         .map(cell -> LiveCell.at(cell, CURRENT))
                         .forEach(livingCells::add));
         return livingCells;

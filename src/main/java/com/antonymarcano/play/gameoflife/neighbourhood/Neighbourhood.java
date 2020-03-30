@@ -6,17 +6,17 @@ import com.antonymarcano.play.gameoflife.cell.Cell;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class Neighbourhood implements Community, StillNeedsACell {
+public class Neighbourhood implements Community, NeedsACell {
     private final GameOfLife board;
     private Survey census;
 
-    public static StillNeedsACell of(GameOfLife board) {
+    public static NeedsACell on(GameOfLife board) {
         return new Neighbourhood(board);
     }
     private Neighbourhood(GameOfLife board) { this.board = board; }
 
     @Override
-    public Community ofGiven(Cell cell) {
+    public Community of(Cell cell) {
         census = Survey.of(board).startingFrom(cell);
         return this;
     }

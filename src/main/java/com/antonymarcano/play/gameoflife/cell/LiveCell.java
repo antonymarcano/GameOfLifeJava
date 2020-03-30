@@ -1,7 +1,7 @@
 package com.antonymarcano.play.gameoflife.cell;
 
 import com.antonymarcano.play.gameoflife.neighbourhood.CellOffsets;
-import com.antonymarcano.play.gameoflife.neighbourhood.StillNeedsACell;
+import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
 
 public class LiveCell extends Cell {
 
@@ -18,13 +18,8 @@ public class LiveCell extends Cell {
     }
 
     @Override
-    public boolean isAllowedToLiveIn(int population) {
-        return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
-    }
-
-    @Override
-    public boolean isAllowedToLiveIn(StillNeedsACell neighbourhood) {
-        int population = neighbourhood.ofGiven(this).population();
+    public boolean isAllowedToLiveIn(NeedsACell neighbourhood) {
+        int population = neighbourhood.of(this).population();
 
         return neighboursIn(population) >= 2 && (neighboursIn(population))  <= 3;
     }

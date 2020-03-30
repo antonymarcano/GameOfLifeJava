@@ -24,7 +24,7 @@ public class NeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Community community = of(board).ofGiven(cell);
+        Community community = on(board).of(cell);
         assertThat(community.population(), is(9));
     }
 
@@ -37,7 +37,7 @@ public class NeighbourhoodShould {
 
         LiveCell cell = LiveCell.at(0, 0);
 
-        Community community = of(board).ofGiven(cell);
+        Community community = on(board).of(cell);
         assertThat(community.population(), is(1));
     }
 
@@ -47,7 +47,7 @@ public class NeighbourhoodShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> neighbourhood = of(board).ofGiven(cell).all();
+        Set<? extends Cell> neighbourhood = on(board).of(cell).all();
 
         Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
                 LiveCell.at(0, 0),
