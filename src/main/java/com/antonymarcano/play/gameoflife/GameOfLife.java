@@ -1,7 +1,7 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
-import com.antonymarcano.play.gameoflife.neighbourhood.NeedsACell;
+import com.antonymarcano.play.gameoflife.neighbourhood.NeighbourhoodNeedsACentre;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -34,7 +34,7 @@ public class GameOfLife {
 
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
         Set<LiveCell> livingCells = new HashSet<>();
-        NeedsACell neighbourhood = on(board);
+        NeighbourhoodNeedsACentre neighbourhood = on(board);
 
         board.currentBoard.forEach(liveCell ->
                 forAllCellsIn(neighbourhood.of(liveCell))

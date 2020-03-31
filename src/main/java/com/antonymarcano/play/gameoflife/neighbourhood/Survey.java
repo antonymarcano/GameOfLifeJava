@@ -18,12 +18,12 @@ import static java.util.stream.Collectors.partitioningBy;
 import static java.util.stream.Collectors.toSet;
 
 @Accessors(fluent = true)
-public class Survey implements NeedsACellToStartSurvey {
+public class Survey implements SurveyNeedsACentre {
     private GameOfLife board;
     @Getter private Set<LiveCell> occupiedAddresses;
     @Getter private Set<DeadCell> vacantAddresses;
 
-    public static NeedsACellToStartSurvey of(GameOfLife board) {
+    public static SurveyNeedsACentre of(GameOfLife board) {
         return new Survey(board);
     }
     private Survey(GameOfLife board) {

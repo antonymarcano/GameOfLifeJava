@@ -6,11 +6,11 @@ import com.antonymarcano.play.gameoflife.cell.Cell;
 import java.util.Set;
 import java.util.stream.Stream;
 
-public class Neighbourhood implements Community, NeedsACell {
+public class Neighbourhood implements Community, NeighbourhoodNeedsACentre {
     private final GameOfLife board;
     private Survey census;
 
-    public static NeedsACell on(GameOfLife board) {
+    public static NeighbourhoodNeedsACentre on(GameOfLife board) {
         return new Neighbourhood(board);
     }
     private Neighbourhood(GameOfLife board) { this.board = board; }
