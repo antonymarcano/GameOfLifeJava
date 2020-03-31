@@ -25,6 +25,7 @@ public class NeighbourhoodShould {
         LiveCell cell = LiveCell.at(0, 0);
 
         Community community = on(board).of(cell);
+
         assertThat(community.population(), is(9));
     }
 
