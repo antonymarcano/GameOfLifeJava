@@ -13,8 +13,7 @@ public class GameOfLifeShould {
     @Test
     public void have_no_live_cells_when_seeded_with_only_one_live_cell() {
         GameOfLife board = GameOfLife.with(Set.of(
-                LiveCell.at(0, 0)
-        ));
+                LiveCell.at(0, 0)));
 
         board = board.nextGeneration();
 
@@ -25,8 +24,7 @@ public class GameOfLifeShould {
     public void have_no_live_cells_when_seeded_with_only_two_live_cells() {
         GameOfLife board = GameOfLife.with(Set.of(
                 LiveCell.at(0, 0),
-                LiveCell.at(0, 1)
-        ));
+                LiveCell.at(0, 1)));
 
         board = board.nextGeneration();
 
@@ -35,12 +33,11 @@ public class GameOfLifeShould {
 
     @Test
     public void stay_unchanged_when_four_cells_have_three_live_neighbours() {
-        Set<LiveCell> stillLifeBlock = Set.of(
+        final var stillLifeBlock = Set.of(
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),
                 LiveCell.at(1, 1),
-                LiveCell.at(1, 0)
-        );
+                LiveCell.at(1, 0));
         GameOfLife board = GameOfLife.with(stillLifeBlock);
 
         board = board.nextGeneration();
@@ -53,8 +50,7 @@ public class GameOfLifeShould {
         final var rightAngle = Set.of(
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),
-                LiveCell.at(1, 1)
-        );
+                LiveCell.at(1, 1));
         GameOfLife board = GameOfLife.with(rightAngle);
 
         board = board.nextGeneration();
@@ -63,8 +59,7 @@ public class GameOfLifeShould {
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),
                 LiveCell.at(1, 1),
-                LiveCell.at(1, 0)
-        );
+                LiveCell.at(1, 0));
         assertThat(board, is(GameOfLife.with(stillLifeBlock)));
     }
 
@@ -78,8 +73,7 @@ public class GameOfLifeShould {
         final var horizontalBar = Set.of(
                 LiveCell.at(-1, 0),
                 LiveCell.at(0, 0),
-                LiveCell.at(1, 0)
-        );
+                LiveCell.at(1, 0));
         GameOfLife board = GameOfLife.with(horizontalBar);
 
         board = board.nextGeneration();
