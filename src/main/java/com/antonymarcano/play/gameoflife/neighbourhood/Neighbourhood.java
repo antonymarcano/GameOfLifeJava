@@ -10,10 +10,10 @@ public class Neighbourhood implements Community, NeighbourhoodNeedsACentre {
     private final GameOfLife board;
     private Survey census;
 
+    private Neighbourhood(GameOfLife board) { this.board = board; }
     public static NeighbourhoodNeedsACentre on(GameOfLife board) {
         return new Neighbourhood(board);
     }
-    private Neighbourhood(GameOfLife board) { this.board = board; }
 
     @Override
     public Community of(Cell cell) {

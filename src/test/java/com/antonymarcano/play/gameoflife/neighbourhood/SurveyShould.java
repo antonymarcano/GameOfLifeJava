@@ -1,7 +1,6 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
 import com.antonymarcano.play.gameoflife.GameOfLife;
-import com.antonymarcano.play.gameoflife.cell.Cell;
 import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
@@ -15,14 +14,14 @@ public class SurveyShould {
 
     @Test
     public void find_one_live_cell_for_lone_cell() {
-        LiveCell oneLivingCell = LiveCell.at(0, 0);
+        final var oneLivingCell = LiveCell.at(0, 0);
         GameOfLife board = GameOfLife.with(Set.of(
                 oneLivingCell
         ));
 
-        Survey census = Survey.of(board).startingFrom(oneLivingCell);
+        final var census = Survey.of(board).startingFrom(oneLivingCell);
 
-        assertThat(census.occupiedAddresses(), is(Set.of(LiveCell.at(0,0))));
+        assertThat(census.occupiedAddresses(), is(Set.of(oneLivingCell)));
     }
 
     @Test
@@ -32,9 +31,9 @@ public class SurveyShould {
                 oneLivingCell
         ));
 
-        Survey census = Survey.of(board).startingFrom(oneLivingCell);
+        final var census = Survey.of(board).startingFrom(oneLivingCell);
 
-        Set<DeadCell> expectedVacantAddresses = Set.of(
+        assertThat(census.vacantAddresses(), is(Set.of(
                 DeadCell.at(0, 1),
                 DeadCell.at(1, 1),
                 DeadCell.at(1, 0),
@@ -43,8 +42,7 @@ public class SurveyShould {
                 DeadCell.at(-1, -1),
                 DeadCell.at(0, -1),
                 DeadCell.at(-1, 1)
-        );
-        assertThat(census.vacantAddresses(), is(expectedVacantAddresses));
+        )));
     }
 
     @Test
@@ -54,10 +52,10 @@ public class SurveyShould {
                 oneLivingCell
         ));
 
-        Survey census = Survey.of(board).startingFrom(oneLivingCell);
+        final var census = Survey.of(board).startingFrom(oneLivingCell);
 
-        Set<Cell> allAddresses = Set.of(
-                LiveCell.at(0,0),
+        assertThat(census.allAddresses(), is(Set.of(
+                LiveCell.at(0, 0),
                 DeadCell.at(0, 1),
                 DeadCell.at(1, 1),
                 DeadCell.at(1, 0),
@@ -66,7 +64,6 @@ public class SurveyShould {
                 DeadCell.at(-1, -1),
                 DeadCell.at(0, -1),
                 DeadCell.at(-1, 1)
-        );
-        assertThat(census.allAddresses(), is(allAddresses));
+        )));
     }
 }

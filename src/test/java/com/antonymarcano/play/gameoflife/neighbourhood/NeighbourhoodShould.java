@@ -1,14 +1,13 @@
 package com.antonymarcano.play.gameoflife.neighbourhood;
 
-import com.antonymarcano.play.gameoflife.cell.Cell;
-import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.GameOfLife;
+import com.antonymarcano.play.gameoflife.cell.DeadCell;
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
 import org.junit.Test;
 
 import java.util.Set;
 
-import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.*;
+import static com.antonymarcano.play.gameoflife.neighbourhood.Neighbourhood.on;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
@@ -22,7 +21,7 @@ public class NeighbourhoodShould {
         GameOfLife board = mock(GameOfLife.class);
         when(board.contains(any(LiveCell.class))).thenReturn(true);
 
-        LiveCell cell = LiveCell.at(0, 0);
+        final var cell = LiveCell.at(0, 0);
 
         Community community = on(board).of(cell);
 
@@ -36,7 +35,7 @@ public class NeighbourhoodShould {
                 .thenReturn(true)
                 .thenReturn(false);
 
-        LiveCell cell = LiveCell.at(0, 0);
+        final var cell = LiveCell.at(0, 0);
 
         Community community = on(board).of(cell);
         assertThat(community.population(), is(1));
@@ -48,9 +47,9 @@ public class NeighbourhoodShould {
         when(board.contains(any(LiveCell.class))).thenReturn(false);
         LiveCell cell = LiveCell.at(0, 0);
 
-        Set<? extends Cell> neighbourhood = on(board).of(cell).all();
+        final var neighbourhood = on(board).of(cell).all();
 
-        Set<? extends Cell> expectedCellsInNeighbourhood = Set.of(
+        assertThat(neighbourhood, is(Set.of(
                 LiveCell.at(0, 0),
                 DeadCell.at(0, 1),
                 DeadCell.at(1, 1),
@@ -60,7 +59,6 @@ public class NeighbourhoodShould {
                 DeadCell.at(-1, -1),
                 DeadCell.at(0, -1),
                 DeadCell.at(-1, 1)
-        );
-        assertThat(neighbourhood, is(expectedCellsInNeighbourhood));
+        )));
     }
 }

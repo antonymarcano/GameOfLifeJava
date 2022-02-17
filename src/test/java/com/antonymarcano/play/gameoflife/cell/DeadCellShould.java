@@ -30,20 +30,20 @@ public class DeadCellShould {
     public void be_reborn_with_three_live_neighbours() {
         when(community.population()).thenReturn(3);
 
-        assertThat(cell.isAllowedToLiveIn(neighbourhood), is(true));
+        assertThat(cell.shouldLiveIn(neighbourhood), is(true));
     }
 
     @Test
     public void not_be_reborn_with_less_than_three_live_neighbours() {
         when(community.population()).thenReturn(2);
 
-        assertThat(cell.isAllowedToLiveIn(neighbourhood), is(false));
+        assertThat(cell.shouldLiveIn(neighbourhood), is(false));
     }
 
     @Test
     public void not_be_reborn_with_more_than_three_live_neighbours() {
         when(community.population()).thenReturn(4);
 
-        assertThat(cell.isAllowedToLiveIn(neighbourhood), is(false));
+        assertThat(cell.shouldLiveIn(neighbourhood), is(false));
     }
 }

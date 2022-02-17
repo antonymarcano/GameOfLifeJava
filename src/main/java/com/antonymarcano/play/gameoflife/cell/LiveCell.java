@@ -18,8 +18,8 @@ public class LiveCell extends Cell {
     }
 
     @Override
-    public boolean isAllowedToLiveIn(NeighbourhoodNeedsACentre neighbourhood) {
-        int neighbours = neighboursIn(populationOf(neighbourhood));
+    public boolean shouldLiveIn(NeighbourhoodNeedsACentre neighbourhood) {
+        var neighbours = neighboursIn(populationOf(neighbourhood));
 
         return neighbours >= 2 && neighbours  <= 3;
     }

@@ -1,7 +1,6 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
-import com.antonymarcano.play.gameoflife.neighbourhood.NeighbourhoodNeedsACentre;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
@@ -18,12 +17,9 @@ import static java.util.Set.copyOf;
 public class GameOfLife {
     private Set<LiveCell> currentBoard;
 
+    private GameOfLife(Set<LiveCell> cells) { currentBoard = copyOf(cells); }
     public static GameOfLife with(Set<LiveCell> cells) {
         return new GameOfLife(cells);
-    }
-
-    public GameOfLife(Set<LiveCell> cells) {
-        currentBoard = copyOf(cells);
     }
 
     public GameOfLife nextGeneration() {
@@ -32,19 +28,19 @@ public class GameOfLife {
         );
     }
 
+    public boolean contains(LiveCell cell) {
+        return currentBoard.contains(cell);
+    }
+
     private Set<LiveCell> livingCellsFrom(GameOfLife board) {
-        Set<LiveCell> livingCells = new HashSet<>();
-        NeighbourhoodNeedsACentre neighbourhood = on(board);
+        var livingCells = new HashSet<LiveCell>();
+        var neighbourhood = on(board);
 
         board.currentBoard.forEach(liveCell ->
                 forAllCellsIn(neighbourhood.of(liveCell))
-                        .filter(cell -> cell.isAllowedToLiveIn(neighbourhood))
+                        .filter(cell -> cell.shouldLiveIn(neighbourhood))
                         .map(cell -> LiveCell.at(cell, CURRENT))
                         .forEach(livingCells::add));
         return livingCells;
-    }
-
-    public boolean contains(LiveCell cell) {
-        return currentBoard.contains(cell);
     }
 }

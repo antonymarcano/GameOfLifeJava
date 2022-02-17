@@ -21,7 +21,7 @@ public class MyCell extends Cell {
     }
 
     @Override
-    public boolean isAllowedToLiveIn(NeighbourhoodNeedsACentre neighbourhood) {
+    public boolean shouldLiveIn(NeighbourhoodNeedsACentre neighbourhood) {
         return false;
     }
 }

@@ -23,11 +23,9 @@ public class Survey implements SurveyNeedsACentre {
     @Getter private Set<LiveCell> occupiedAddresses;
     @Getter private Set<DeadCell> vacantAddresses;
 
+    private Survey(GameOfLife board) { this.board = board; }
     public static SurveyNeedsACentre of(GameOfLife board) {
         return new Survey(board);
-    }
-    private Survey(GameOfLife board) {
-        this.board = board;
     }
 
     @Override

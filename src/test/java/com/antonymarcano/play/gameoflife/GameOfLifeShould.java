@@ -50,7 +50,7 @@ public class GameOfLifeShould {
 
     @Test
     public void get_a_still_life_block_from_L_shaped_seed() {
-        Set<LiveCell> rightAngle = Set.of(
+        final var rightAngle = Set.of(
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),
                 LiveCell.at(1, 1)
@@ -59,7 +59,7 @@ public class GameOfLifeShould {
 
         board = board.nextGeneration();
 
-        Set<LiveCell> stillLifeBlock = Set.of(
+        final var stillLifeBlock = Set.of(
                 LiveCell.at(0, 0),
                 LiveCell.at(0, 1),
                 LiveCell.at(1, 1),
@@ -70,24 +70,22 @@ public class GameOfLifeShould {
 
     @Test //superfluous test but included to illustrate the scope of behaviour
     public void oscillator_blinker() {
-        Set<LiveCell> horizontalBar = Set.of(
+        final var verticalBar = Set.of(
+                LiveCell.at(0, -1),
                 LiveCell.at(0, 0),
-                LiveCell.at(1, 0),
-                LiveCell.at(-1, 0)
+                LiveCell.at(0, 1)
+        );
+        final var horizontalBar = Set.of(
+                LiveCell.at(-1, 0),
+                LiveCell.at(0, 0),
+                LiveCell.at(1, 0)
         );
         GameOfLife board = GameOfLife.with(horizontalBar);
 
         board = board.nextGeneration();
-
-        Set<LiveCell> verticalBar = Set.of(
-                LiveCell.at(0, 0),
-                LiveCell.at(0, 1),
-                LiveCell.at(0, -1)
-        );
         assertThat(board, is(GameOfLife.with(verticalBar)));
 
         board = board.nextGeneration();
-
         assertThat(board, is(GameOfLife.with(horizontalBar)));
     }
 }
