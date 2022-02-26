@@ -1,12 +1,12 @@
 package com.antonymarcano.play.gameoflife;
 
 import com.antonymarcano.play.gameoflife.cell.LiveCell;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import java.util.Set;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 
 public class GameOfLifeShould {
 
